@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #1e1e1e;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .btn {
+            background-color: #6200ea;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #3700b3;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: none;
+            resize: none;
+        }
+        .result {
+            margin-top: 20px;
+            background-color: #333;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .result div {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+        <form method="post" action="/analyze/">
+            <textarea name="text" rows="6" placeholder="Enter your text here..." required>{{ input_text if input_text else '' }}</textarea>
+            <button type="submit" class="btn">Analyze</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>Analysis Result</h2>
+            <div><strong>Input Text:</strong> {{ input_text }}</div>
+            <div><strong>Negative Sentiment:</strong> {{ result.negative }}</div>
+            <div><strong>Neutral Sentiment:</strong> {{ result.neutral }}</div>
+            <div><strong>Positive Sentiment:</strong> {{ result.positive }}</div>
+            <div><strong>Toxicity:</strong> {{ result.toxicity }}</div>
+            <div>
+                <strong>Toxicity Category:</strong> {{ toxicity_category }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
